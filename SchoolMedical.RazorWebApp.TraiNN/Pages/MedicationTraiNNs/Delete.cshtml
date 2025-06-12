@@ -1,0 +1,79 @@
+﻿@page
+@model SchoolMedical.RazorWebApp.TraiNN.Pages.MedicationTraiNns.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete Medication";
+}
+
+<h1 class="text-danger mb-4"><i class="bi bi-exclamation-triangle-fill"></i> Confirm Deletion</h1>
+
+<h5 class="mb-4 text-secondary">Are you sure you want to delete this medication record?</h5>
+
+<div class="card shadow-sm mb-4">
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3 fw-semibold">Medicine Name</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.MedicationTraiNn.MedicineName)</dd>
+
+            <dt class="col-sm-3 fw-semibold">Quantity</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.MedicationTraiNn.Quantity)</dd>
+
+            <dt class="col-sm-3 fw-semibold">Unit</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.MedicationTraiNn.Unit)</dd>
+
+            <dt class="col-sm-3 fw-semibold">Type</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.MedicationTraiNn.Type)</dd>
+
+            <dt class="col-sm-3 fw-semibold">Status</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.MedicationTraiNn.Status)</dd>
+
+            <dt class="col-sm-3 fw-semibold">Parent Note</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.MedicationTraiNn.ParentNote)</dd>
+
+            <dt class="col-sm-3 fw-semibold">Nurse Note</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.MedicationTraiNn.NurseNote)</dd>
+
+            <dt class="col-sm-3 fw-semibold">Receive Date</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.MedicationTraiNn.ReceiveDate)</dd>
+
+            <dt class="col-sm-3 fw-semibold">Sender</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.MedicationTraiNn.Dongui.Id)</dd>
+        </dl>
+    </div>
+</div>
+
+<form method="post">
+    <input type="hidden" asp-for="MedicationTraiNn.MedicationTraiNNid" />
+    <button type="submit" class="btn btn-danger me-2">
+        <i class="bi bi-trash-fill"></i> Delete
+    </button>
+    <input type="button" id="btnHubDelete" value="Delete by SignalRHub" class="btn btn-primary" />
+    <a asp-page="./Index" class="btn btn-secondary">
+        <i class="bi bi-arrow-left-circle"></i> Back to List
+    </a>
+</form>
+
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+
+<script>
+    "use strict";
+
+    var connection = new signalR.HubConnectionBuilder().withUrl("/schoolMedicalHub").build();
+
+    connection.start().then(function () {
+        console.log("Connected to the SignalR Hub");
+    }).catch(function (err) {
+        return console.error(err.toString());
+    });
+
+    document.getElementById("btnHubDelete").addEventListener("click", function (event) {
+
+        var dataObj = document.getElementById("MedicationTraiNn_MedicationTraiNNid").value;
+        console.log(dataObj);
+
+        connection.invoke("HubDelete_SchoolMedical", dataObj).catch(function (err) {
+            return console.error(err.toString());
+        });
+        event.preventDefault();
+    });
+</script>

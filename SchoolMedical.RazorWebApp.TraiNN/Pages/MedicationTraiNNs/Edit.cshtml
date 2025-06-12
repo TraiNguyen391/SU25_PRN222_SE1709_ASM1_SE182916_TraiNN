@@ -1,0 +1,135 @@
+﻿@page
+@model SchoolMedical.RazorWebApp.TraiNN.Pages.MedicationTraiNns.EditModel
+
+@{
+    ViewData["Title"] = "Edit Medication";
+}
+
+<h1 class="text-primary mb-4">@ViewData["Title"]</h1>
+
+<div class="card shadow border-0">
+    <div class="card-header bg-warning text-dark">
+        <h5 class="mb-0">Edit Medication Information</h5>
+    </div>
+    <div class="card-body bg-light">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+            <input type="hidden" asp-for="MedicationTraiNn.MedicationTraiNNid" />
+
+            <div class="mb-3">
+                <label asp-for="MedicationTraiNn.MedicationTraiNNid" class="form-label fw-bold"></label>
+                <input asp-for="MedicationTraiNn.MedicationTraiNNid" class="form-control" readonly />
+                <span asp-validation-for="MedicationTraiNn.MedicationTraiNNid" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="MedicationTraiNn.DonguiId" class="form-label fw-bold"></label>
+                <select asp-for="MedicationTraiNn.DonguiId" class="form-select" asp-items="ViewBag.DonguiId"></select>
+                <span asp-validation-for="MedicationTraiNn.DonguiId" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="MedicationTraiNn.MedicineName" class="form-label fw-bold"></label>
+                <input asp-for="MedicationTraiNn.MedicineName" class="form-control" />
+                <span asp-validation-for="MedicationTraiNn.MedicineName" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="MedicationTraiNn.Quantity" class="form-label fw-bold"></label>
+                <input asp-for="MedicationTraiNn.Quantity" class="form-control" />
+                <span asp-validation-for="MedicationTraiNn.Quantity" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="MedicationTraiNn.Unit" class="form-label fw-bold"></label>
+                <input asp-for="MedicationTraiNn.Unit" class="form-control" />
+                <span asp-validation-for="MedicationTraiNn.Unit" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="MedicationTraiNn.Type" class="form-label fw-bold"></label>
+                <input asp-for="MedicationTraiNn.Type" class="form-control" />
+                <span asp-validation-for="MedicationTraiNn.Type" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="MedicationTraiNn.Status" class="form-label fw-bold"></label>
+                <select asp-for="MedicationTraiNn.Status" class="form-control">
+                    <option value="True">True</option>
+                    <option value="False">False</option>
+                </select>
+                <span asp-validation-for="MedicationTraiNn.Status" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="MedicationTraiNn.ParentNote" class="form-label fw-bold"></label>
+                <input asp-for="MedicationTraiNn.ParentNote" class="form-control" />
+                <span asp-validation-for="MedicationTraiNn.ParentNote" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="MedicationTraiNn.NurseNote" class="form-label fw-bold"></label>
+                <input asp-for="MedicationTraiNn.NurseNote" class="form-control" />
+                <span asp-validation-for="MedicationTraiNn.NurseNote" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="MedicationTraiNn.ReceiveDate" class="form-label fw-bold"></label>
+                <input asp-for="MedicationTraiNn.ReceiveDate" class="form-control" />
+                <span asp-validation-for="MedicationTraiNn.ReceiveDate" class="text-danger"></span>
+            </div>
+
+            <div class="d-flex justify-content-start mt-4">
+                <button type="submit" class="btn btn-primary me-2">
+                    <i class="bi bi-save"></i> Save
+                </button>
+
+                <button type="button" id="btnHubUpdate" class="btn btn-primary">
+                    Update by SignalRHub
+                </button>
+
+                <a class="btn btn-outline-secondary ms-2" asp-page="./Index">
+                    <i class="bi bi-arrow-left"></i> Back to List
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/signalr/dist/browser/signalr.js"></script>
+
+    <script>
+        "use strict";
+
+        var connection = new signalR.HubConnectionBuilder().withUrl("/schoolMedicalHub").build();
+
+        connection.start().then(function () {
+            console.log("Connected to the SignalR Hub");
+        }).catch(function (err) {
+            return console.error(err.toString());
+        });
+
+        document.getElementById("btnHubUpdate").addEventListener("click", function (event) {
+            var dataObj = JSON.stringify({
+                MedicationTraiNNid: document.getElementById("MedicationTraiNn_MedicationTraiNNid").value,
+                DonguiId: document.getElementById("MedicationTraiNn_DonguiId").value,
+                MedicineName: document.getElementById("MedicationTraiNn_MedicineName").value,
+                Quantity: document.getElementById("MedicationTraiNn_Quantity").value,
+                Unit: document.getElementById("MedicationTraiNn_Unit").value,
+                Type: document.getElementById("MedicationTraiNn_Type").value,
+                Status: document.getElementById("MedicationTraiNn_Status").value,
+                ParentNote: document.getElementById("MedicationTraiNn_ParentNote").value,
+                NurseNote: document.getElementById("MedicationTraiNn_NurseNote").value,
+                ReceiveDate: document.getElementById("MedicationTraiNn_ReceiveDate").value
+            });
+
+            console.log(dataObj);
+
+            connection.invoke("HubUpdate_SchoolMedical", dataObj).catch(function (err) {
+                return console.error(err.toString());
+            });
+            event.preventDefault();
+        });
+    </script>
+}

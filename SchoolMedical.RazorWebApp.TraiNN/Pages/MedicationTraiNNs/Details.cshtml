@@ -1,0 +1,192 @@
+﻿@page
+@model SchoolMedical.RazorWebApp.TraiNN.Pages.MedicationTraiNns.DetailsModel
+
+@{
+    ViewData["Title"] = "Medication Details";
+}
+
+<h1 class="text-primary mb-4">@ViewData["Title"]</h1>
+
+<div class="card shadow border-0" id="detailsCard">
+    <div class="card-header bg-info text-white">
+        <h5 class="mb-0">Medication Information</h5>
+    </div>
+    <div class="card-body bg-light">
+        <dl class="row" id="medicalTraiNN">
+            <dt class="col-sm-3 fw-bold text-dark">
+                Medication ID
+            </dt>
+            <dd class="col-sm-9" id="detail-medication-id">
+                @Model.MedicationTraiNn.MedicationTraiNNid
+            </dd>
+
+            <dt class="col-sm-3 fw-bold text-dark">
+                Student Name
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.MedicationTraiNn.Dongui.Student.StudentFullName)
+            </dd>
+
+            <dt class="col-sm-3 fw-bold text-dark">
+                @Html.DisplayNameFor(model => model.MedicationTraiNn.MedicineName)
+            </dt>
+            <dd class="col-sm-9" id="detail-medicine-name">
+                @Model.MedicationTraiNn.MedicineName
+            </dd>
+
+            <dt class="col-sm-3 fw-bold text-dark">
+                @Html.DisplayNameFor(model => model.MedicationTraiNn.Quantity)
+            </dt>
+            <dd class="col-sm-9" id="detail-quantity">
+                @Model.MedicationTraiNn.Quantity
+            </dd>
+
+            <dt class="col-sm-3 fw-bold text-dark">
+                @Html.DisplayNameFor(model => model.MedicationTraiNn.Unit)
+            </dt>
+            <dd class="col-sm-9" id="detail-unit">
+                @Model.MedicationTraiNn.Unit
+            </dd>
+
+            <dt class="col-sm-3 fw-bold text-dark">
+                @Html.DisplayNameFor(model => model.MedicationTraiNn.Type)
+            </dt>
+            <dd class="col-sm-9" id="detail-type">
+                @Model.MedicationTraiNn.Type
+            </dd>
+
+            <dt class="col-sm-3 fw-bold text-dark">
+                @Html.DisplayNameFor(model => model.MedicationTraiNn.Status)
+            </dt>
+            <dd class="col-sm-9" id="detail-status">
+                @if (Model.MedicationTraiNn.Status.ToString() == "True")
+                {
+                    <span class="badge bg-success">Available</span>
+                }
+                else if (Model.MedicationTraiNn.Status.ToString() == "False")
+                {
+                    <span class="badge bg-danger">Unavailable</span>
+                }
+            </dd>
+
+            <dt class="col-sm-3 fw-bold text-dark">
+                Parent Name
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.MedicationTraiNn.Dongui.Parent.UserName)
+            </dd>
+
+            <dt class="col-sm-3 fw-bold text-dark">
+                @Html.DisplayNameFor(model => model.MedicationTraiNn.ParentNote)
+            </dt>
+            <dd class="col-sm-9" id="detail-parent-note">
+                @(string.IsNullOrEmpty(Model.MedicationTraiNn.ParentNote) ? "N/A" : Model.MedicationTraiNn.ParentNote)
+            </dd>
+
+            <dt class="col-sm-3 fw-bold text-dark">
+                Nurse Name
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.MedicationTraiNn.Dongui.Nurse.UserName)
+            </dd>
+
+            <dt class="col-sm-3 fw-bold text-dark">
+                @Html.DisplayNameFor(model => model.MedicationTraiNn.NurseNote)
+            </dt>
+            <dd class="col-sm-9" id="detail-nurse-note">
+                @(string.IsNullOrEmpty(Model.MedicationTraiNn.NurseNote) ? "N/A" : Model.MedicationTraiNn.NurseNote)
+            </dd>
+
+            <dt class="col-sm-3 fw-bold text-dark">
+                Submission Date
+            </dt>
+            <dd class="col-sm-9">
+                @Model.MedicationTraiNn.Dongui.CreateAt
+            </dd>
+
+            <dt class="col-sm-3 fw-bold text-dark">
+                @Html.DisplayNameFor(model => model.MedicationTraiNn.ReceiveDate)
+            </dt>
+            <dd class="col-sm-9" id="detail-receive-date">
+                @Model.MedicationTraiNn.ReceiveDate?.ToString("dd/MM/yyyy")
+            </dd>
+        </dl>
+    </div>
+</div>
+
+<div class="mt-4" id="actionButtons">
+    <a class="btn btn-warning text-dark me-2" asp-page="./Edit" asp-route-id="@Model.MedicationTraiNn.MedicationTraiNNid">
+        <i class="bi bi-pencil-square"></i> Edit
+    </a>
+    <a class="btn btn-outline-secondary" asp-page="./Index">
+        <i class="bi bi-arrow-left"></i> Back to List
+    </a>
+</div>
+
+
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script>
+    "use strict";
+
+    // Lấy ID của bản ghi đang hiển thị từ Model của Razor
+    const currentMedicationId = @Model.MedicationTraiNn.MedicationTraiNNid;
+
+    var connection = new signalR.HubConnectionBuilder().withUrl("/schoolMedicalHub").build();
+
+    connection.start().then(function () {
+        console.log("Connected to the SignalR Hub");
+    }).catch(function (err) {
+        return console.error(err.toString());
+    });
+
+    connection.on("ReceiveDelete_SchoolMedical", function (deletedId) {
+        // Chỉ xử lý nếu item bị xóa chính là item đang xem
+        if (deletedId === currentMedicationId) {
+            const cardBody = document.querySelector("#detailsCard .card-body");
+            const actionButtons = document.getElementById("actionButtons");
+
+            cardBody.innerHTML = `
+                <div class="alert alert-danger" role="alert">
+                    <h4 class="alert-heading">Record Deleted!</h4>
+                    <p>This medication record has been deleted by another user.</p>
+                    <hr>
+                    <p class="mb-0">You will be redirected to the list page in 5 seconds.</p>
+                </div>`;
+
+            if(actionButtons) {
+                actionButtons.remove();
+            }
+
+            setTimeout(() => {
+                window.location.href = "/MedicationTraiNns/Index";
+            }, 5000); // Chờ 5 giây rồi chuyển hướng
+        }
+    });
+
+    connection.on("ReceiveUpdate_SchoolMedical", function (item) {
+        // Chỉ cập nhật giao diện nếu item được update chính là item đang xem
+        if (item.medicationTraiNNid === currentMedicationId) {
+            console.log("Updating details for item: ", item);
+
+            // Cập nhật từng trường một cách an toàn
+            document.getElementById('detail-medicine-name').innerText = item.medicineName;
+            document.getElementById('detail-quantity').innerText = item.quantity;
+            document.getElementById('detail-unit').innerText = item.unit;
+            document.getElementById('detail-type').innerText = item.type;
+            document.getElementById('detail-parent-note').innerText = item.parentNote || 'N/A';
+            document.getElementById('detail-nurse-note').innerText = item.nurseNote || 'N/A';
+
+            // Cập nhật trạng thái với badge
+            const statusBadge = item.status
+                ? '<span class="badge bg-success">Available</span>'
+                : '<span class="badge bg-danger">Unavailable</span>';
+            document.getElementById('detail-status').innerHTML = statusBadge;
+
+            // Cập nhật và định dạng ngày nhận
+            const receiveDate = new Date(item.receiveDate);
+            const formattedDate = `${('0' + receiveDate.getDate()).slice(-2)}/${('0' + (receiveDate.getMonth() + 1)).slice(-2)}/${receiveDate.getFullYear()}`;
+            document.getElementById('detail-receive-date').innerText = formattedDate;
+        }
+        alert("A record has been updated!");
+    });
+</script>

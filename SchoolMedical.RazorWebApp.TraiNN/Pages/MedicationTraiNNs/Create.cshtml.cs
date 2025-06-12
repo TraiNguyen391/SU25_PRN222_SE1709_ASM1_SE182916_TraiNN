@@ -1,0 +1,63 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using SchoolMedical.Repository.TraiNN.DBContext;
+using SchoolMedical.Repository.TraiNN.Models;
+using SchoolMedical.Service.TraiNN;
+
+namespace SchoolMedical.RazorWebApp.TraiNN.Pages.MedicationTraiNns
+{
+    [Authorize(Roles = "1,2")]
+    public class CreateModel : PageModel
+    {
+        private readonly IMedicationTraiNNService _medicationTraiNNService;
+        private readonly IMedicationOrderTraiNNService _medicationOrderTraiNNService;
+
+        public CreateModel(IMedicationTraiNNService medicationTraiNNService, IMedicationOrderTraiNNService medicationOrderTraiNN)
+        {
+            _medicationTraiNNService = medicationTraiNNService;
+            _medicationOrderTraiNNService = medicationOrderTraiNN;
+        }
+
+        public async Task<IActionResult> OnGet()
+        {
+            var medication = await _medicationTraiNNService.GetAllAsync();
+            var medicationOrder = await _medicationOrderTraiNNService.GetAllAsync();
+
+            //Console.WriteLine(medication.Count);
+
+            //ViewData["DonguiId"] = new SelectList(medication, "DonguiId", "DonguiId");
+            ViewData["DonguiId"] = new SelectList(medicationOrder, "Id", "Id");
+            return Page();
+        }
+
+        [BindProperty]
+        public MedicationTraiNn MedicationTraiNn { get; set; } = default!;
+
+        // For more information, see https://aka.ms/RazorPagesCRUD.
+        public async Task<IActionResult> OnPostAsync()
+        {
+            MedicationTraiNn.MedicationTraiNNid = 0;
+            MedicationTraiNn.ReceiveDate = DateTime.Now;
+            MedicationTraiNn.Status = true; // Default status to true when creating a new record
+
+
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+
+            //_medicationTraiNNService.MedicationTraiNns.Add(MedicationTraiNn);
+
+            await _medicationTraiNNService.CreateAsync(MedicationTraiNn);
+            //await _medicationTraiNNService.SaveChangesAsync();
+
+            return RedirectToPage("./Index");
+        }
+    }
+}
