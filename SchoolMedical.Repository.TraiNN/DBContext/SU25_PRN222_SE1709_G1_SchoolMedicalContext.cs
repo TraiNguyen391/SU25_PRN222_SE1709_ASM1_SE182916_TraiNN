@@ -8,13 +8,13 @@ using SchoolMedical.Repository.TraiNN.Models;
 
 namespace SchoolMedical.Repository.TraiNN.DBContext;
 
-public partial class Medication : DbContext
+public partial class SU25_PRN222_SE1709_G1_SchoolMedicalContext : DbContext
 {
-    public Medication()
+    public SU25_PRN222_SE1709_G1_SchoolMedicalContext()
     {
     }
 
-    public Medication(DbContextOptions<Medication> options)
+    public SU25_PRN222_SE1709_G1_SchoolMedicalContext(DbContextOptions<SU25_PRN222_SE1709_G1_SchoolMedicalContext> options)
         : base(options)
     {
     }

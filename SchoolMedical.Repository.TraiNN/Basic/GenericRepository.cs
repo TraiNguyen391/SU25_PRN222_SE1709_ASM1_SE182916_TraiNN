@@ -1,23 +1,18 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SchoolMedical.Repository.TraiNN.DBContext;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SchoolMedical.Repository.TraiNN.Basic
 {
     public class GenericRepository<T> where T : class
     {
-        protected Medication _context;
+        protected SU25_PRN222_SE1709_G1_SchoolMedicalContext _context;
 
         public GenericRepository()
         {
-            _context ??= new Medication();
+            _context ??= new SU25_PRN222_SE1709_G1_SchoolMedicalContext();
         }
 
-        public GenericRepository(Medication context)
+        public GenericRepository(SU25_PRN222_SE1709_G1_SchoolMedicalContext context)
         {
             _context = context;
         }
