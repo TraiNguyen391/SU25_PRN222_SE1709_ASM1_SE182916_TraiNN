@@ -120,7 +120,13 @@
     connection.on("ReceiveCreate_SchoolMedical", function (item) {
         console.log("ReceiveCreate_SchoolMedical", item);
         var newRowHtml = createMedicationRow(item);
-        alert("A new record has been created!");
+
+        if (item.medicineName == "Test data") {
+            alert("New test data created!");
+        } else {
+            alert("New record data created!");
+        }
+
         $('#medicationTBodyTraiNN').append(newRowHtml);
     });
 

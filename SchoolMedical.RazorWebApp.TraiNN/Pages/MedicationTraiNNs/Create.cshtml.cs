@@ -43,8 +43,19 @@ namespace SchoolMedical.RazorWebApp.TraiNN.Pages.MedicationTraiNns
         public async Task<IActionResult> OnPostAsync()
         {
             MedicationTraiNn.MedicationTraiNNid = 0;
-            MedicationTraiNn.ReceiveDate = DateTime.Now;
-            MedicationTraiNn.Status = true; // Default status to true when creating a new record
+
+            if (MedicationTraiNn.MedicineName == null || MedicationTraiNn.MedicineName.Trim().Length == 0)
+            {
+                MedicationTraiNn.DonguiId = 1; // Default value if empty
+                MedicationTraiNn.MedicineName = "Test data"; // Default value if empty
+                MedicationTraiNn.Quantity = 1; // Default quantity
+                MedicationTraiNn.Unit = "mg"; // Default unit
+                MedicationTraiNn.Type = "Test type"; // Default type
+                MedicationTraiNn.ParentNote = "Test parent note"; // Default parent note
+                MedicationTraiNn.NurseNote = "Test nurse note"; // Default nurse note
+                MedicationTraiNn.ReceiveDate = DateTime.Now;
+                MedicationTraiNn.Status = true;
+            }
 
 
             if (!ModelState.IsValid)
@@ -52,10 +63,7 @@ namespace SchoolMedical.RazorWebApp.TraiNN.Pages.MedicationTraiNns
                 return Page();
             }
 
-            //_medicationTraiNNService.MedicationTraiNns.Add(MedicationTraiNn);
-
             await _medicationTraiNNService.CreateAsync(MedicationTraiNn);
-            //await _medicationTraiNNService.SaveChangesAsync();
 
             return RedirectToPage("./Index");
         }

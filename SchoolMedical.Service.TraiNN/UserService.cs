@@ -1,10 +1,5 @@
 ﻿using SchoolMedical.Repository.TraiNN;
 using SchoolMedical.Repository.TraiNN.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SchoolMedical.Service.TraiNN
 {
