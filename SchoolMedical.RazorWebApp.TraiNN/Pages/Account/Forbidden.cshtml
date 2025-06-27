@@ -4,8 +4,16 @@
     ViewData["Title"] = "Forbidden";
 }
 
-<div class="row text-center">
-    <h3 class="text-danger">Forbidden</h3>
-    <h4 class="text-danger">You do not have permission to do this function!</h4>
-    <div class="text-info">Please contact to Anonymous User</div>
+<link rel="stylesheet" href="~/css/style.css" />
+
+<div class="d-flex justify-content-center align-items-center" style="min-height: 70vh;">
+    <div class="shadow p-5" style="background: #f1faee; border-radius: 24px; max-width: 480px;">
+        <h1 class="text-primary mb-3" style="font-size:2.5rem;">403 Forbidden</h1>
+        <div class="mb-3">
+            <span class="badge bg-danger" style="font-size:1.2rem;">Access Denied</span>
+        </div>
+        <h4 class="text-danger mb-3">You do not have permission to do this function!</h4>
+        <div class="mb-4 text-info">Please contact to Anonymous User</div>
+        <a href="/" class="btn btn-primary btn-sm">Back to Home</a>
+    </div>
 </div>

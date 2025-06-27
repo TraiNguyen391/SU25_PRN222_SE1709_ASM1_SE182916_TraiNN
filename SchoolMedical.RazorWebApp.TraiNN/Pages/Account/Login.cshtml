@@ -12,10 +12,10 @@
     <title>Login - zPayment</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/style.css" />
     <style>
         body {
-            background: #f8f9fa;
+            background: #f1faee;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -32,34 +32,56 @@
         .card-login {
             width: 100%;
             max-width: 420px;
-            padding: 2rem;
-            border-radius: 1rem;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+            padding: 2.5rem 2rem;
+            border-radius: 24px;
+            box-shadow: 0 2px 12px #b7e4c755;
             background-color: #fff;
         }
 
             .card-login h2 {
                 text-align: center;
                 margin-bottom: 1.5rem;
-                font-weight: 600;
-                color: #0d6efd;
+                font-weight: bold;
+                color: #344e41;
+                letter-spacing: 1px;
+                text-shadow: 1px 2px 4px #b7e4c7;
             }
 
-        .input-group-text {
-            background-color: #fff;
-            border-right: 0;
+        .input-group {
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 1px 4px #b7e4c733;
+            border: 1px solid #b7e4c7;
+            background: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .input-group .form-control,
+        .input-group .input-group-text {
+            border: none;
+            border-radius: 0;
+            background: transparent;
+        }
+
+        .input-group .form-control:focus {
+            box-shadow: none;
+            background: #f1faee;
         }
 
         .form-control {
             border-left: 0;
+            border-radius: 24px;
         }
 
             .form-control:focus {
-                box-shadow: none;
+                box-shadow: 0 0 0 0.2rem #38b6ff33;
+                border-color: #38b6ff;
             }
 
-        .btn-primary {
-            font-weight: 500;
+        .d-grid .btn {
+            border-radius: 24px;
+            font-weight: 600;
+            box-shadow: 0 2px 8px #38b6ff33;
         }
     </style>
 </head>
@@ -89,12 +111,12 @@
                     <div class="input-group">
                         <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
                         <input asp-for="UserName" class="form-control" placeholder="Enter username"/>
-                    </div>                                                                      <!--acc auditor chiefacc-->
+                    </div>
                     <span asp-validation-for="UserName" class="text-danger"></span>
                 </div>
 
                 <div class="mb-4">
-                    <label asp-for="Password" class="form-label">Password</label> <!--@@a-->
+                    <label asp-for="Password" class="form-label">Password</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
                         <input asp-for="Password" type="password" class="form-control" placeholder="Enter password" />

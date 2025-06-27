@@ -15,7 +15,6 @@ namespace SchoolMedical.RazorWebApp.TraiNN.Pages.MedicationTraiNns
     [Authorize(Roles = "1, 2")]
     public class IndexModel : PageModel
     {
-        //private readonly SchoolMedical.Repository.TraiNN.DBContext.zPaymentContext _context;
         private readonly IMedicationTraiNNService _medicationTraiNNService;
 
         public IndexModel(IMedicationTraiNNService medicationTraiNNService)
@@ -23,22 +22,24 @@ namespace SchoolMedical.RazorWebApp.TraiNN.Pages.MedicationTraiNns
             _medicationTraiNNService = medicationTraiNNService;
         }
 
-        public IList<MedicationTraiNn> MedicationTraiNn { get;set; } = default!;
+        public IList<MedicationTraiNn> MedicationTraiNn { get; set; } = new List<MedicationTraiNn>();
 
-        public async Task OnGetAsync(int? code, int? quantity, string medicineName)
+        // Pagination properties
+        public int CurrentPage { get; set; }
+        public int TotalPages { get; set; }
+        public int PageSize { get; set; } = 10; // Số bản ghi mỗi trang
+
+        public async Task OnGetAsync(int? pageNumber)
         {
-            if (code.HasValue || quantity.HasValue || !string.IsNullOrEmpty(medicineName))
-            {
-                MedicationTraiNn = await _medicationTraiNNService.SearchAsync(
-                    code ?? 0,
-                    quantity ?? 0,
-                    medicineName ?? string.Empty
-                );
-            }
-            else
-            {
-                MedicationTraiNn = await _medicationTraiNNService.GetAllAsync();
-            }
+            var allItems = await _medicationTraiNNService.GetAllAsync();
+            CurrentPage = pageNumber ?? 1;
+            int totalCount = allItems.Count;
+            TotalPages = (int)Math.Ceiling(totalCount / (double)PageSize);
+
+            MedicationTraiNn = allItems
+                .Skip((CurrentPage - 1) * PageSize)
+                .Take(PageSize)
+                .ToList();
         }
     }
 }

@@ -3,6 +3,28 @@
     color: #344e41 !important;
 }
 
+.swamp-table thead,
+.swamp-table thead th {
+    background: linear-gradient(0deg, #43e97b 0%, #38f9d7 100%) !important;
+    color: #22223b !important;
+    font-weight: 700;
+    font-size: 1.15rem;
+    letter-spacing: 1px;
+    text-align: center;
+    border-bottom: 3px solid #43aa8b;
+    text-shadow: 0 2px 8px #fff, 0 1px 2px #38f9d755;
+    vertical-align: middle;
+    box-shadow: 0 2px 12px #43e97b33;
+}
+
+.swamp-table thead th:first-child {
+    border-top-left-radius: 18px;
+}
+
+.swamp-table thead th:last-child {
+    border-top-right-radius: 18px;
+}
+
 .swamp-table tbody tr {
     background-color: #d8f3dc;
     color: #344e41;
@@ -149,3 +171,52 @@ form.row.g-2.mb-3 .form-control {
         border-color: #38b6ff;
         box-shadow: 0 0 0 0.2rem #38b6ff33;
     }
+
+.btn-signout:hover, .btn-signout:focus {
+    background: #ef233c !important; /* Đỏ tươi */
+    color: #fff !important;
+    border: none;
+    box-shadow: 0 4px 16px #ef233c55;
+}
+
+.swamp-form {
+    background: #f1faee;
+    border-radius: 24px;
+    box-shadow: 0 2px 12px #b7e4c755;
+    padding: 2rem 2.5rem;
+    margin-bottom: 2rem;
+    border: 1px solid #b7e4c7;
+}
+.swamp-form .form-label {
+    color: #344e41;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+.swamp-form .form-control,
+.swamp-form .form-select {
+    border-radius: 18px;
+    box-shadow: 0 1px 4px #b7e4c733;
+    border: 1px solid #b7e4c7;
+    margin-bottom: 0.5rem;
+}
+.swamp-form .form-control:focus,
+.swamp-form .form-select:focus {
+    border-color: #38b6ff;
+    box-shadow: 0 0 0 0.2rem #38b6ff33;
+}
+
+.pagination .page-link {
+    color: #43aa8b;
+    border: none;
+    margin: 0 2px;
+    font-weight: 500;
+    transition: background 0.2s, color 0.2s;
+}
+.pagination .page-link:hover, .pagination .page-item.active .page-link {
+    background: #b7e4c7;
+    color: #344e41;
+}
+.pagination .page-item.disabled .page-link {
+    color: #ccc;
+    background: #f8f9fa;
+}

@@ -4,90 +4,82 @@
 @{
     ViewData["Title"] = "Create Medication";
 }
+<link rel="stylesheet" href="~/css/style.css" />
 
 <h1 class="text-primary mb-4">@ViewData["Title"]</h1>
 
-<div class="card shadow border-0">
-    <div class="card-header bg-success text-white">
-        <h5 class="mb-0">New Medication Entry</h5>
+<form method="post" class="swamp-form">
+    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+    <div class="mb-3">
+        <label asp-for="MedicationTraiNn.MedicationTraiNNid" class="form-label fw-bold"></label>
+        <input readonly class="form-control" />
     </div>
-    <div class="card-body bg-light">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
-            <div class="mb-3">
-                <label asp-for="MedicationTraiNn.MedicationTraiNNid" class="form-label fw-bold"></label>
-                <input readonly class="form-control" />
-            </div>
-
-            <div class="mb-3">
-                <label asp-for="MedicationTraiNn.DonguiId" class="form-label fw-bold"></label>
-                <select asp-for="MedicationTraiNn.DonguiId" class="form-select" asp-items="ViewBag.DonguiId"></select>
-                <span asp-validation-for="MedicationTraiNn.DonguiId" class="text-danger"></span>
-            </div>
-
-            <div class="mb-3">
-                <label asp-for="MedicationTraiNn.MedicineName" class="form-label fw-bold"></label>
-                <input asp-for="MedicationTraiNn.MedicineName" class="form-control" />
-                <span asp-validation-for="MedicationTraiNn.MedicineName" class="text-danger"></span>
-            </div>
-
-            <div class="mb-3">
-                <label asp-for="MedicationTraiNn.Quantity" class="form-label fw-bold"></label>
-                <input asp-for="MedicationTraiNn.Quantity" class="form-control" />
-                <span asp-validation-for="MedicationTraiNn.Quantity" class="text-danger"></span>
-            </div>
-
-            <div class="mb-3">
-                <label asp-for="MedicationTraiNn.Unit" class="form-label fw-bold"></label>
-                <input asp-for="MedicationTraiNn.Unit" class="form-control" />
-                <span asp-validation-for="MedicationTraiNn.Unit" class="text-danger"></span>
-            </div>
-
-            <div class="mb-3">
-                <label asp-for="MedicationTraiNn.Type" class="form-label fw-bold"></label>
-                <input asp-for="MedicationTraiNn.Type" class="form-control" />
-                <span asp-validation-for="MedicationTraiNn.Type" class="text-danger"></span>
-            </div>
-
-            <div class="mb-3">
-                <label asp-for="MedicationTraiNn.Status" class="form-label fw-bold"></label>
-                <input asp-for="MedicationTraiNn.Status" class="form-control" readonly />
-                <span asp-validation-for="MedicationTraiNn.Status" class="text-danger"></span>
-            </div>
-
-            <div class="mb-3">
-                <label asp-for="MedicationTraiNn.ParentNote" class="form-label fw-bold"></label>
-                <input asp-for="MedicationTraiNn.ParentNote" class="form-control" />
-                <span asp-validation-for="MedicationTraiNn.ParentNote" class="text-danger"></span>
-            </div>
-
-            <div class="mb-3">
-                <label asp-for="MedicationTraiNn.NurseNote" class="form-label fw-bold"></label>
-                <input asp-for="MedicationTraiNn.NurseNote" class="form-control" />
-                <span asp-validation-for="MedicationTraiNn.NurseNote" class="text-danger"></span>
-            </div>
-
-            <div class="mb-3">
-                <label asp-for="MedicationTraiNn.ReceiveDate" class="form-label fw-bold"></label>
-                <input asp-for="MedicationTraiNn.ReceiveDate" class="form-control" readonly />
-                <span asp-validation-for="MedicationTraiNn.ReceiveDate" class="text-danger"></span>
-            </div>
-
-            <div class="d-flex justify-content-start mt-4">
-                <button type="submit" class="btn btn-success me-2">
-                    <i class="bi bi-plus-circle"></i> Create
-                </button>
-
-                <input type="button" id="btnHubCreate" value="Create by SignalRHub" class="btn btn-primary" />
-
-                <a class="btn btn-outline-secondary" asp-page="Index">
-                    <i class="bi bi-arrow-left"></i> Back to List
-                </a>
-            </div>
-        </form>
+    <div class="mb-3">
+        <label asp-for="MedicationTraiNn.DonguiId" class="form-label fw-bold"></label>
+        <select asp-for="MedicationTraiNn.DonguiId" class="form-select"></select>
+        <span asp-validation-for="MedicationTraiNn.DonguiId" class="text-danger"></span>
     </div>
-</div>
+
+    <div class="mb-3">
+        <label asp-for="MedicationTraiNn.MedicineName" class="form-label fw-bold"></label>
+        <input asp-for="MedicationTraiNn.MedicineName" class="form-control" />
+        <span asp-validation-for="MedicationTraiNn.MedicineName" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="MedicationTraiNn.Quantity" class="form-label fw-bold"></label>
+        <input asp-for="MedicationTraiNn.Quantity" class="form-control" />
+        <span asp-validation-for="MedicationTraiNn.Quantity" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="MedicationTraiNn.Unit" class="form-label fw-bold"></label>
+        <input asp-for="MedicationTraiNn.Unit" class="form-control" />
+        <span asp-validation-for="MedicationTraiNn.Unit" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="MedicationTraiNn.Type" class="form-label fw-bold"></label>
+        <input asp-for="MedicationTraiNn.Type" class="form-control" />
+        <span asp-validation-for="MedicationTraiNn.Type" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="MedicationTraiNn.Status" class="form-label fw-bold"></label>
+        <input asp-for="MedicationTraiNn.Status" class="form-control" readonly />
+        <span asp-validation-for="MedicationTraiNn.Status" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="MedicationTraiNn.ParentNote" class="form-label fw-bold"></label>
+        <input asp-for="MedicationTraiNn.ParentNote" class="form-control" />
+        <span asp-validation-for="MedicationTraiNn.ParentNote" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="MedicationTraiNn.NurseNote" class="form-label fw-bold"></label>
+        <input asp-for="MedicationTraiNn.NurseNote" class="form-control" />
+        <span asp-validation-for="MedicationTraiNn.NurseNote" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="MedicationTraiNn.ReceiveDate" class="form-label fw-bold"></label>
+        <input asp-for="MedicationTraiNn.ReceiveDate" class="form-control" />
+        <span asp-validation-for="MedicationTraiNn.ReceiveDate" class="text-danger"></span>
+    </div>
+
+    <div class="d-flex justify-content-start mt-4 gap-2">
+        <button type="submit" class="btn btn-success">
+            <i class="bi bi-plus-circle"></i> Create
+        </button>
+        <input type="button" id="btnHubCreate" value="Create by SignalRHub" class="btn btn-primary" />
+        <a class="btn btn-info" asp-page="Index">
+            <i class="bi bi-arrow-left"></i> Back to List
+        </a>
+    </div>
+</form>
 
 <script src="~/js/signalr/dist/browser/signalr.js"></script>
 

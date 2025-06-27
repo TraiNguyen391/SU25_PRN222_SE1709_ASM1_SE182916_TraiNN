@@ -4,125 +4,91 @@
 @{
     ViewData["Title"] = "Medication Details";
 }
+<link rel="stylesheet" href="~/css/style.css" />
 
 <h1 class="text-primary mb-4">@ViewData["Title"]</h1>
 
-<div class="card shadow border-0" id="detailsCard">
-    <div class="card-header bg-info text-white">
-        <h5 class="mb-0">Medication Information</h5>
-    </div>
-    <div class="card-body bg-light">
-        <dl class="row" id="medicalTraiNN">
-            <dt class="col-sm-3 fw-bold text-dark">
-                Medication ID
-            </dt>
-            <dd class="col-sm-9" id="detail-medication-id">
-                @Model.MedicationTraiNn.MedicationTraiNNid
-            </dd>
-
-            <dt class="col-sm-3 fw-bold text-dark">
-                Student Name
-            </dt>
-            <dd class="col-sm-9">
-                @Html.DisplayFor(model => model.MedicationTraiNn.Dongui.Student.StudentFullName)
-            </dd>
-
-            <dt class="col-sm-3 fw-bold text-dark">
-                @Html.DisplayNameFor(model => model.MedicationTraiNn.MedicineName)
-            </dt>
-            <dd class="col-sm-9" id="detail-medicine-name">
-                @Model.MedicationTraiNn.MedicineName
-            </dd>
-
-            <dt class="col-sm-3 fw-bold text-dark">
-                @Html.DisplayNameFor(model => model.MedicationTraiNn.Quantity)
-            </dt>
-            <dd class="col-sm-9" id="detail-quantity">
-                @Model.MedicationTraiNn.Quantity
-            </dd>
-
-            <dt class="col-sm-3 fw-bold text-dark">
-                @Html.DisplayNameFor(model => model.MedicationTraiNn.Unit)
-            </dt>
-            <dd class="col-sm-9" id="detail-unit">
-                @Model.MedicationTraiNn.Unit
-            </dd>
-
-            <dt class="col-sm-3 fw-bold text-dark">
-                @Html.DisplayNameFor(model => model.MedicationTraiNn.Type)
-            </dt>
-            <dd class="col-sm-9" id="detail-type">
-                @Model.MedicationTraiNn.Type
-            </dd>
-
-            <dt class="col-sm-3 fw-bold text-dark">
-                @Html.DisplayNameFor(model => model.MedicationTraiNn.Status)
-            </dt>
-            <dd class="col-sm-9" id="detail-status">
-                @if (Model.MedicationTraiNn.Status.ToString() == "True")
-                {
-                    <span class="badge bg-success">Available</span>
-                }
-                else if (Model.MedicationTraiNn.Status.ToString() == "False")
-                {
-                    <span class="badge bg-danger">Unavailable</span>
-                }
-            </dd>
-
-            <dt class="col-sm-3 fw-bold text-dark">
-                Parent Name
-            </dt>
-            <dd class="col-sm-9">
-                @Html.DisplayFor(model => model.MedicationTraiNn.Dongui.Parent.UserName)
-            </dd>
-
-            <dt class="col-sm-3 fw-bold text-dark">
-                @Html.DisplayNameFor(model => model.MedicationTraiNn.ParentNote)
-            </dt>
-            <dd class="col-sm-9" id="detail-parent-note">
-                @(string.IsNullOrEmpty(Model.MedicationTraiNn.ParentNote) ? "N/A" : Model.MedicationTraiNn.ParentNote)
-            </dd>
-
-            <dt class="col-sm-3 fw-bold text-dark">
-                Nurse Name
-            </dt>
-            <dd class="col-sm-9">
-                @Html.DisplayFor(model => model.MedicationTraiNn.Dongui.Nurse.UserName)
-            </dd>
-
-            <dt class="col-sm-3 fw-bold text-dark">
-                @Html.DisplayNameFor(model => model.MedicationTraiNn.NurseNote)
-            </dt>
-            <dd class="col-sm-9" id="detail-nurse-note">
-                @(string.IsNullOrEmpty(Model.MedicationTraiNn.NurseNote) ? "N/A" : Model.MedicationTraiNn.NurseNote)
-            </dd>
-
-            <dt class="col-sm-3 fw-bold text-dark">
-                Submission Date
-            </dt>
-            <dd class="col-sm-9">
-                @Model.MedicationTraiNn.Dongui.CreateAt
-            </dd>
-
-            <dt class="col-sm-3 fw-bold text-dark">
-                @Html.DisplayNameFor(model => model.MedicationTraiNn.ReceiveDate)
-            </dt>
-            <dd class="col-sm-9" id="detail-receive-date">
-                @Model.MedicationTraiNn.ReceiveDate?.ToString("dd/MM/yyyy")
-            </dd>
-        </dl>
-    </div>
+<div class="table-responsive">
+    <table class="table swamp-table table-striped table-bordered shadow-sm rounded align-middle">
+        <thead class="table-info text-center">
+            <tr>
+                <th colspan="2" class="fs-5 text-center">Details</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+            <tr>
+                <th class="w-25 text-dark fw-bold align-middle text-center">Medication ID</th>
+                <td id="detail-id">@Model.MedicationTraiNn.MedicationTraiNNid</td>
+            </tr>
+            <tr>
+                <th class="w-25 text-dark fw-bold align-middle text-center">Student Name</th>
+                <td>@Html.DisplayFor(model => model.MedicationTraiNn.Dongui.Student.StudentFullName)</td>
+            </tr>
+            <tr>
+                <th class="w-25 text-dark fw-bold align-middle text-center">@Html.DisplayNameFor(model => model.MedicationTraiNn.MedicineName)</th>
+                <td id="detail-medicine-name">@Model.MedicationTraiNn.MedicineName</td>
+            </tr>
+            <tr>
+                <th class="w-25 text-dark fw-bold align-middle text-center">@Html.DisplayNameFor(model => model.MedicationTraiNn.Quantity)</th>
+                <td id="detail-quantity">@Model.MedicationTraiNn.Quantity</td>
+            </tr>
+            <tr>
+                <th class="w-25 text-dark fw-bold align-middle text-center">@Html.DisplayNameFor(model => model.MedicationTraiNn.Unit)</th>
+                <td id="detail-unit">@Model.MedicationTraiNn.Unit</td>
+            </tr>
+            <tr>
+                <th class="w-25 text-dark fw-bold align-middle text-center">@Html.DisplayNameFor(model => model.MedicationTraiNn.Type)</th>
+                <td id="detail-type">@Model.MedicationTraiNn.Type</td>
+            </tr>
+            <tr>
+                <th class="w-25 text-dark fw-bold align-middle text-center">@Html.DisplayNameFor(model => model.MedicationTraiNn.Status)</th>
+                <td id="detail-status">
+                    @if (Model.MedicationTraiNn.Status.ToString() == "True")
+                    {
+                        <span class="badge bg-success">Available</span>
+                    }
+                    else if (Model.MedicationTraiNn.Status.ToString() == "False")
+                    {
+                        <span class="badge bg-danger">Unavailable</span>
+                    }
+                </td>
+            </tr>
+            <tr>
+                <th class="w-25 text-dark fw-bold align-middle text-center">Parent Name</th>
+                <td>@Html.DisplayFor(model => model.MedicationTraiNn.Dongui.Parent.UserName)</td>
+            </tr>
+            <tr>
+                <th class="w-25 text-dark fw-bold align-middle text-center">@Html.DisplayNameFor(model => model.MedicationTraiNn.ParentNote)</th>
+                <td id="detail-parent-note">@(string.IsNullOrEmpty(Model.MedicationTraiNn.ParentNote) ? "N/A" : Model.MedicationTraiNn.ParentNote)</td>
+            </tr>
+            <tr>
+                <th class="w-25 text-dark fw-bold align-middle text-center">Nurse Name</th>
+                <td>@Html.DisplayFor(model => model.MedicationTraiNn.Dongui.Nurse.UserName)</td>
+            </tr>
+            <tr>
+                <th class="w-25 text-dark fw-bold align-middle text-center">@Html.DisplayNameFor(model => model.MedicationTraiNn.NurseNote)</th>
+                <td id="detail-nurse-note">@(string.IsNullOrEmpty(Model.MedicationTraiNn.NurseNote) ? "N/A" : Model.MedicationTraiNn.NurseNote)</td>
+            </tr>
+            <tr>
+                <th class="w-25 text-dark fw-bold align-middle text-center">Submission Date</th>
+                <td>@Model.MedicationTraiNn.Dongui.CreateAt</td>
+            </tr>
+            <tr>
+                <th class="w-25 text-dark fw-bold align-middle text-center">@Html.DisplayNameFor(model => model.MedicationTraiNn.ReceiveDate)</th>
+                <td id="detail-receive-date">@Model.MedicationTraiNn.ReceiveDate?.ToString("dd/MM/yyyy")</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
 
-<div class="mt-4" id="actionButtons">
-    <a class="btn btn-warning text-dark me-2" asp-page="./Edit" asp-route-id="@Model.MedicationTraiNn.MedicationTraiNNid">
+<div class="mt-4 d-flex gap-2" id="actionButtons">
+    <a class="btn btn-warning text-white" asp-page="./Edit" asp-route-id="@Model.MedicationTraiNn.MedicationTraiNNid">
         <i class="bi bi-pencil-square"></i> Edit
     </a>
-    <a class="btn btn-outline-secondary" asp-page="./Index">
+    <a class="btn btn-info" asp-page="./Index">
         <i class="bi bi-arrow-left"></i> Back to List
     </a>
 </div>
-
 
 <script src="~/js/signalr/dist/browser/signalr.js"></script>
 <script>
