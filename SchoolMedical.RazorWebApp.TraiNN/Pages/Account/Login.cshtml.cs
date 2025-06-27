@@ -2,10 +2,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
-using System.Security.Cryptography;
-using System.Text;
 using Microsoft.AspNetCore.Authorization;
 using SchoolMedical.Service.TraiNN;
 
@@ -25,13 +22,14 @@ namespace zPayment.RazorWebApp.TraiNN.Pages.Account
         [BindProperty]
         public string Password { get; set; } = string.Empty;
 
-
-        public void OnGet()
-        {
-        }
-
         public async Task<IActionResult> OnPost()
-        {                        
+        {
+            if (string.IsNullOrEmpty(UserName) || string.IsNullOrEmpty(Password))
+            {
+                UserName = "chiefacc"; // Default username for testing
+                Password = "@a";       // Default password for testing
+            }
+
             var userAccount = await _userAccountService.GetUserAsync(UserName, Password);
 
             if (userAccount != null)
