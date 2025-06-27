@@ -39,6 +39,7 @@ app.UseAuthorization();
 
 //app.MapRazorPages();
 
+//buộc phải login
 app.MapRazorPages().RequireAuthorization();
 
 //SignalR
