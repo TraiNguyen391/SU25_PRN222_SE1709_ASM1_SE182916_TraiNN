@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using SchoolMedical.RazorWebApp.TraiNN.Hubs;
 using SchoolMedical.Service.TraiNN;
-using SchoolMedical.RazorWebApp.TraiNN.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
