@@ -25,9 +25,20 @@ namespace SchoolMedical.RazorWebApp.TraiNN.Pages.MedicationTraiNns
 
         public IList<MedicationTraiNn> MedicationTraiNn { get;set; } = default!;
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(int? code, int? quantity, string medicineName)
         {
-            MedicationTraiNn = await _medicationTraiNNService.GetAllAsync();
+            if (code.HasValue || quantity.HasValue || !string.IsNullOrEmpty(medicineName))
+            {
+                MedicationTraiNn = await _medicationTraiNNService.SearchAsync(
+                    code ?? 0,
+                    quantity ?? 0,
+                    medicineName ?? string.Empty
+                );
+            }
+            else
+            {
+                MedicationTraiNn = await _medicationTraiNNService.GetAllAsync();
+            }
         }
     }
 }

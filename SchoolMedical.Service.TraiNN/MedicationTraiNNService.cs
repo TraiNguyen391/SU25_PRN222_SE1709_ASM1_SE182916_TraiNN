@@ -24,9 +24,9 @@ namespace SchoolMedical.Service.TraiNN
             return await _repository.GetByIdAsync(code);
         }
 
-        public async Task<List<MedicationTraiNn>> SearchAsync(int code, int amount, string bankNo)
+        public async Task<List<MedicationTraiNn>> SearchAsync(int code, int quantity, string medicinename)
         {
-            return await _repository.SearchAsync(code, amount, bankNo);
+            return await _repository.SearchAsync(code, quantity, medicinename);
         }
 
         public async Task<int> CreateAsync(MedicationTraiNn entity)

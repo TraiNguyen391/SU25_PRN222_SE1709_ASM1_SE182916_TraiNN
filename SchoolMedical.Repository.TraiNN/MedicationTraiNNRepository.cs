@@ -37,9 +37,10 @@ namespace SchoolMedical.Repository.TraiNN
             //search theo ID, name, số
 
             var item = await _context.MedicationTraiNns.Include(d => d.Dongui)
-                .Where(d => d.MedicationTraiNNid == code || code == null || code == 0 //search theo ID 
-                    && (d.Quantity == quantity || quantity == null || quantity == 0)  //search theo số
-                    && (d.MedicineName.Contains(medicineName) || string.IsNullOrEmpty(medicineName)) //string
+                .Where(d =>
+                    (code == 0 || d.MedicationTraiNNid == code) &&
+                    (quantity == 0 || d.Quantity == quantity) &&
+                    (string.IsNullOrEmpty(medicineName) || d.MedicineName.Contains(medicineName))
                 ).ToListAsync();
 
             return item ?? new List<MedicationTraiNn>();
