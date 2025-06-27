@@ -111,6 +111,10 @@
         });
 
         document.getElementById("btnHubUpdate").addEventListener("click", function (event) {
+            connection.on("ReceiveUpdate_SchoolMedical", function (item) {
+                window.location.href = "/MedicationTraiNNs/Index";
+            });
+
             var dataObj = JSON.stringify({
                 MedicationTraiNNid: document.getElementById("MedicationTraiNn_MedicationTraiNNid").value,
                 DonguiId: document.getElementById("MedicationTraiNn_DonguiId").value,

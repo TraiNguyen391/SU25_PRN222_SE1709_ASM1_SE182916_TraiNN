@@ -141,7 +141,8 @@
 
     connection.on("ReceiveDelete_SchoolMedical", function (deletedId) {
         // Chỉ xử lý nếu item bị xóa chính là item đang xem
-        if (deletedId === currentMedicationId) {
+        if (deletedId == currentMedicationId) {
+            alert("This record has been deleted by another user. Redirecting to Index in 10 seconds.");
             const cardBody = document.querySelector("#detailsCard .card-body");
             const actionButtons = document.getElementById("actionButtons");
 

@@ -17,9 +17,9 @@
 
             <div class="mb-3">
                 <label asp-for="MedicationTraiNn.MedicationTraiNNid" class="form-label fw-bold"></label>
-                <input asp-for="MedicationTraiNn.MedicationTraiNNid" readonly class="form-control" />
+                <input readonly class="form-control" />
             </div>
-            
+
             <div class="mb-3">
                 <label asp-for="MedicationTraiNn.DonguiId" class="form-label fw-bold"></label>
                 <select asp-for="MedicationTraiNn.DonguiId" class="form-select" asp-items="ViewBag.DonguiId"></select>
@@ -104,6 +104,10 @@
 
     document.getElementById("btnHubCreate").addEventListener("click", function (event) {
 
+        connection.on("ReceiveCreate_SchoolMedical", function (item) {
+            window.location.href = "/MedicationTraiNNs/Index";
+        });
+
         var dataObj = JSON.stringify({
             DonguiId: document.getElementById("MedicationTraiNn_DonguiId").value,
             MedicineName: document.getElementById("MedicationTraiNn_MedicineName").value,
@@ -121,6 +125,7 @@
         connection.invoke("HubCreate_SchoolMedical", dataObj).catch(function (err) {
             return console.error(err.toString());
         });
+
         event.preventDefault();
     });
 </script>

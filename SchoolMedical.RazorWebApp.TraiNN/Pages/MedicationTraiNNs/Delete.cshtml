@@ -67,6 +67,9 @@
     });
 
     document.getElementById("btnHubDelete").addEventListener("click", function (event) {
+        connection.on("ReceiveDelete_SchoolMedical", function (item) {
+            window.location.href = "/MedicationTraiNNs/Index";
+        });
 
         var dataObj = document.getElementById("MedicationTraiNn_MedicationTraiNNid").value;
         console.log(dataObj);

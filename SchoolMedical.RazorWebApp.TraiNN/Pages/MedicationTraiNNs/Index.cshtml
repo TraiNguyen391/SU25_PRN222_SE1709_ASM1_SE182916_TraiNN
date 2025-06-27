@@ -122,10 +122,14 @@
         var newRowHtml = createMedicationRow(item);
 
         if (item.medicineName == "Test data") {
-            alert("New test data created!");
+            alert("New test data created, the page will auto refresh in 5 seconds.");
         } else {
-            alert("New record data created!");
+            alert("New record created, the page will auto refresh in 5 seconds.");
         }
+
+        setTimeout(() => {
+                window.location.href = "/MedicationTraiNns/Index";
+            }, 5000); // Chờ 5 giây rồi chuyển hướng
 
         $('#medicationTBodyTraiNN').append(newRowHtml);
     });
