@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using SchoolMedical.Service.TraiNN;
 
 
-namespace zPayment.RazorWebApp.TraiNN.Pages.Account
+namespace SchoolMedical.RazorWebApp.TraiNN.Pages.Account
 {
     [AllowAnonymous]
     public class LoginModel : PageModel
@@ -24,7 +24,7 @@ namespace zPayment.RazorWebApp.TraiNN.Pages.Account
 
         public async Task<IActionResult> OnPost()
         {
-            if (string.IsNullOrEmpty(UserName) || string.IsNullOrEmpty(Password))
+            if (string.IsNullOrEmpty(UserName) && string.IsNullOrEmpty(Password))
             {
                 UserName = "chiefacc"; // Default username for testing
                 Password = "@a";       // Default password for testing
