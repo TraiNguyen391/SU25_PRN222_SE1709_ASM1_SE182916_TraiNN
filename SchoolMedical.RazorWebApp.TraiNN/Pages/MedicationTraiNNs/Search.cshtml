@@ -7,12 +7,24 @@
 <link rel="stylesheet" href="~/css/style.css" />
 <h1 class="text-primary mb-4">@ViewData["Title"]</h1>
 
+<form method="get" class="row g-2 mb-3">
+    <div class="col">
+        <input type="number" name="code" class="form-control" placeholder="Medication ID" value="@Request.Query["code"]" />
+    </div>
+    <div class="col">
+        <input type="number" name="quantity" class="form-control" placeholder="Quantity" value="@Request.Query["quantity"]" />
+    </div>
+    <div class="col">
+        <input type="text" name="medicineName" class="form-control" placeholder="Medicine Name" value="@Request.Query["medicineName"]" />
+    </div>
+    <div class="col">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+</form>
+
 <div class="mb-3">
     <a asp-page="Create" class="btn btn-success">
         <i class="bi bi-plus-circle"></i> Add New Medication
-    </a>
-    <a asp-page="Search" class="btn btn-success">
-        <i class="bi bi-plus-circle"></i> Search
     </a>
 </div>
 
