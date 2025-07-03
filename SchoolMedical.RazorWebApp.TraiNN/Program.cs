@@ -13,7 +13,9 @@ builder.Services.AddScoped<IMedicationOrderTraiNNService, MedicationOrderTraiNNS
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
-        options.AccessDeniedPath = "/Account/Forbidden";
+        options.LoginPath = "/MedicationTraiNNs/Login";
+        options.LogoutPath = "/MedicationTraiNNs/Logout";
+        options.AccessDeniedPath = "/MedicationTraiNNs/Forbidden";
         options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
     });
 
@@ -35,6 +37,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 //app.MapRazorPages();

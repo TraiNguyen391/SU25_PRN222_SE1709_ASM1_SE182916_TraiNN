@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using SchoolMedical.Service.TraiNN;
 
 
-namespace SchoolMedical.RazorWebApp.TraiNN.Pages.Account
+namespace SchoolMedical.RazorWebApp.TraiNN.Pages.MedicationTraiNNs
 {
     [AllowAnonymous]
     public class LoginModel : PageModel

@@ -54,7 +54,7 @@
                             <a class="nav-link @(Context.Request.Path == "/" ? "active" : "")" asp-page="/Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link @(Context.Request.Path.Value?.ToLower().Contains("/medicationtrainns") == true ? "active" : "")" asp-page="/MedicationTraiNns/Index">Medication</a>
+                            <a class="nav-link @(Context.Request.Path.Value?.ToLower().Contains("/medicationtrainns") == true ? "active" : "")" href="/MedicationTraiNns/Index">Medication</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link @(Context.Request.Path == "/Privacy" ? "active" : "")" asp-page="/Privacy">Privacy</a>
@@ -64,7 +64,7 @@
                     <div class="user-info text-nowrap">
                         <span class="text-muted">Welcome,</span>
                         <strong>@Context.Request.Cookies["UserName"]</strong>
-                        <a class="btn btn-success btn-sm ms-2 fw-bold text-uppercase btn-signout" style="letter-spacing:1px;" href="/Account/Logout">
+                        <a class="btn btn-success btn-sm ms-2 fw-bold text-uppercase btn-signout" style="letter-spacing:1px;" href="/MedicationTraiNNs/Logout">
                             <i class="bi bi-box-arrow-right me-1"></i> Sign Out
                         </a>
                     </div>

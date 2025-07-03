@@ -41,7 +41,7 @@ namespace SchoolMedical.Repository.TraiNN
                     (code == 0 || d.MedicationTraiNNid == code) &&
                     (quantity == 0 || d.Quantity == quantity) &&
                     (string.IsNullOrEmpty(medicineName) || d.MedicineName.Contains(medicineName))
-                ).ToListAsync();
+                ).OrderByDescending(d => d.Quantity) .ToListAsync();
 
             return item ?? new List<MedicationTraiNn>();
         }

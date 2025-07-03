@@ -13,11 +13,11 @@ using SchoolMedical.Service.TraiNN;
 namespace SchoolMedical.RazorWebApp.TraiNN.Pages.MedicationTraiNns
 {
     [Authorize(Roles = "1, 2")]
-    public class IndexModel : PageModel
+    public class SearchModel : PageModel
     {
         private readonly IMedicationTraiNNService _medicationTraiNNService;
 
-        public IndexModel(IMedicationTraiNNService medicationTraiNNService)
+        public SearchModel(IMedicationTraiNNService medicationTraiNNService)
         {
             _medicationTraiNNService = medicationTraiNNService;
         }
