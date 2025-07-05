@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using SchoolMedical.Repository.TraiNN.DBContext;
 using SchoolMedical.Repository.TraiNN.Models;
 using SchoolMedical.Service.TraiNN;
 
 namespace SchoolMedical.RazorWebApp.TraiNN.Pages.MedicationTraiNns
 {
-    [Authorize(Roles = "1,2")]
+    [Authorize(Roles = "1,3")]
     public class CreateModel : PageModel
     {
         private readonly IMedicationTraiNNService _medicationTraiNNService;
