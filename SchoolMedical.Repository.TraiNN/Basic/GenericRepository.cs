@@ -38,7 +38,6 @@ namespace SchoolMedical.Repository.TraiNN.Basic
         }
         public void Update(T entity)
         {
-            //// Turning off Tracking for UpdateAsync in Entity Framework
             _context.ChangeTracker.Clear();
             var tracker = _context.Attach(entity);
             tracker.State = EntityState.Modified;
@@ -87,10 +86,6 @@ namespace SchoolMedical.Repository.TraiNN.Basic
             return await _context.Set<T>().FindAsync(code);
         }
 
-        /*
-        https://guidgenerator.com/
-        daacb4fb-ff73-46ef-98f1-4af9aab2a30a
-         */
         public T GetById(Guid code)
         {
             return _context.Set<T>().Find(code);
