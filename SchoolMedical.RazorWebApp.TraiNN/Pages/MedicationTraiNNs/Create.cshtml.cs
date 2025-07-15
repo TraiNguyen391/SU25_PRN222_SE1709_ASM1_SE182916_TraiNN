@@ -24,8 +24,6 @@ namespace SchoolMedical.RazorWebApp.TraiNN.Pages.MedicationTraiNns
             var medication = await _medicationTraiNNService.GetAllAsync();
             var medicationOrder = await _medicationOrderTraiNNService.GetAllAsync();
 
-            //Console.WriteLine(medication.Count);
-
             //ViewData["DonguiId"] = new SelectList(medication, "DonguiId", "DonguiId");
             ViewData["DonguiId"] = new SelectList(medicationOrder, "Id", "Id");
             return Page();
@@ -39,18 +37,21 @@ namespace SchoolMedical.RazorWebApp.TraiNN.Pages.MedicationTraiNns
         {
             MedicationTraiNn.MedicationTraiNNid = 0;
 
-            if (MedicationTraiNn.MedicineName == null || MedicationTraiNn.MedicineName.Trim().Length == 0)
-            {
-                MedicationTraiNn.DonguiId = 1; // Default value if empty
-                MedicationTraiNn.MedicineName = "Test data"; // Default value if empty
-                MedicationTraiNn.Quantity = 1; // Default quantity
-                MedicationTraiNn.Unit = "mg"; // Default unit
-                MedicationTraiNn.Type = "Test type"; // Default type
-                MedicationTraiNn.ParentNote = "Test parent note"; // Default parent note
-                MedicationTraiNn.NurseNote = "Test nurse note"; // Default nurse note
-                MedicationTraiNn.ReceiveDate = DateTime.Now;
-                MedicationTraiNn.Status = true;
-            }
+            MedicationTraiNn.Status = true; // Default status
+            MedicationTraiNn.ReceiveDate = DateTime.Now; // Default receive date
+
+            //if (MedicationTraiNn.MedicineName == null || MedicationTraiNn.MedicineName.Trim().Length == 0)
+            //{
+            //    MedicationTraiNn.DonguiId = 1; // Default value if empty
+            //    MedicationTraiNn.MedicineName = "Test data"; // Default value if empty
+            //    MedicationTraiNn.Quantity = 1; // Default quantity
+            //    MedicationTraiNn.Unit = "mg"; // Default unit
+            //    MedicationTraiNn.Type = "Test type"; // Default type
+            //    MedicationTraiNn.ParentNote = "Test parent note"; // Default parent note
+            //    MedicationTraiNn.NurseNote = "Test nurse note"; // Default nurse note
+            //    MedicationTraiNn.ReceiveDate = DateTime.Now;
+            //    MedicationTraiNn.Status = true;
+            //}
 
 
             if (!ModelState.IsValid)

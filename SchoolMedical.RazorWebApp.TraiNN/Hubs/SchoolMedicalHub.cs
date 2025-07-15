@@ -26,18 +26,21 @@ namespace SchoolMedical.RazorWebApp.TraiNN.Hubs
         {
             var item = JsonConvert.DeserializeObject<MedicationTraiNn>(schoolMedicalId);
 
-            if (item.MedicineName == null || item.MedicineName.Trim().Length == 0)
-            {
-                item.DonguiId = 1; // Default value if empty
-                item.MedicineName = "Test data"; // Default value if empty
-                item.Quantity = 1; // Default quantity
-                item.Unit = "mg"; // Default unit
-                item.Type = "Test type"; // Default type
-                item.ParentNote = "Test parent note"; // Default parent note
-                item.NurseNote = "Test nurse note"; // Default nurse note
-                item.ReceiveDate = DateTime.Now;
-                item.Status = true;
-            }
+            item.Status = true; // Default status
+            item.ReceiveDate = DateTime.Now; // Default receive date
+
+            //if (item.MedicineName == null || item.MedicineName.Trim().Length == 0)
+            //{
+            //    item.DonguiId = 1; // Default value if empty
+            //    item.MedicineName = "Test data"; // Default value if empty
+            //    item.Quantity = 1; // Default quantity
+            //    item.Unit = "mg"; // Default unit
+            //    item.Type = "Test type"; // Default type
+            //    item.ParentNote = "Test parent note"; // Default parent note
+            //    item.NurseNote = "Test nurse note"; // Default nurse note
+            //    item.ReceiveDate = DateTime.Now;
+            //    item.Status = true;
+            //}
 
             await Clients.All.SendAsync("ReceiveCreate_SchoolMedical", item);
 
