@@ -40,7 +40,7 @@ public partial class MedicationTraiNn
     [RegularExpression(@"^[a-zA-Z\s]+$", ErrorMessage = "Type can only contain letters and spaces")]
     public string Type { get; set; }
 
-    [Required(ErrorMessage = "Status is required")]
+    //[Required(ErrorMessage = "Status is required")]
     [Display(Name = "Status")]
     [RegularExpression(@"^(true|false)$", ErrorMessage = "Status must be true or false")]
     public bool? Status { get; set; }

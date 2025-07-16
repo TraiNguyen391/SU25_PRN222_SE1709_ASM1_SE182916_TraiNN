@@ -56,6 +56,7 @@ namespace SchoolMedical.RazorWebApp.TraiNN.Pages.MedicationTraiNns
 
             if (!ModelState.IsValid)
             {
+                ViewData["DonguiId"] = new SelectList(await _medicationOrderTraiNNService.GetAllAsync(), "Id", "Id");
                 return Page();
             }
 

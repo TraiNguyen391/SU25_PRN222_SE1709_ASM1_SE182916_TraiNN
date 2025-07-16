@@ -24,11 +24,11 @@ namespace SchoolMedical.RazorWebApp.TraiNN.Pages.MedicationTraiNNs
 
         public async Task<IActionResult> OnPost()
         {
-            if (string.IsNullOrEmpty(UserName) && string.IsNullOrEmpty(Password))
-            {
-                UserName = "chiefacc"; // Default username for testing
-                Password = "@a";       // Default password for testing
-            }
+            //if (string.IsNullOrEmpty(UserName) && string.IsNullOrEmpty(Password))
+            //{
+            //    UserName = "chiefacc"; // Default username for testing
+            //    Password = "@a";       // Default password for testing
+            //}
 
             var userAccount = await _userAccountService.GetUserAsync(UserName, Password);
 

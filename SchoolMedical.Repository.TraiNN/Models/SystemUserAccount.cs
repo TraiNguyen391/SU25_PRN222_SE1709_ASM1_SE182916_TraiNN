@@ -10,12 +10,12 @@ public partial class SystemUserAccount
 {
     public int UserAccountId { get; set; }
 
-    //[Required(ErrorMessage = "Username is required")]
+    [Required(ErrorMessage = "Username is required")]
     [StringLength(50, ErrorMessage = "Username cannot exceed 50 characters")]
     [Display(Name = "acc auditor chiefacc")]
     public string UserName { get; set; }
 
-    //[Required(ErrorMessage = "Password is required")]
+    [Required(ErrorMessage = "Password is required")]
     [StringLength(100, ErrorMessage = "Password cannot exceed 100 characters")]
     [Display(Name = "acc auditor chiefacc")]
     [DataType(DataType.Password)]
