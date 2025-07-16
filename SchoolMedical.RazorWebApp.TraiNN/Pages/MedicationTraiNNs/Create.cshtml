@@ -18,7 +18,7 @@
 
     <div class="mb-3">
         <label asp-for="MedicationTraiNn.DonguiId" class="form-label fw-bold"></label>
-        <select asp-for="MedicationTraiNn.DonguiId" class="form-select"></select>
+        <select asp-for="MedicationTraiNn.DonguiId" class="form-control" asp-items="ViewBag.DonguiId"></select>
         <span asp-validation-for="MedicationTraiNn.DonguiId" class="text-danger"></span>
     </div>
 
@@ -46,11 +46,11 @@
         <span asp-validation-for="MedicationTraiNn.Type" class="text-danger"></span>
     </div>
 
-    <div class="mb-3">
+    @* <div class="mb-3">
         <label asp-for="MedicationTraiNn.Status" class="form-label fw-bold"></label>
         <input asp-for="MedicationTraiNn.Status" class="form-control" readonly />
         <span asp-validation-for="MedicationTraiNn.Status" class="text-danger"></span>
-    </div>
+    </div> *@
 
     <div class="mb-3">
         <label asp-for="MedicationTraiNn.ParentNote" class="form-label fw-bold"></label>

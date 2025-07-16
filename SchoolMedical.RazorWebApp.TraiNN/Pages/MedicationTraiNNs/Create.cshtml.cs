@@ -21,9 +21,9 @@ namespace SchoolMedical.RazorWebApp.TraiNN.Pages.MedicationTraiNns
 
         public async Task<IActionResult> OnGet()
         {
-            var medication = await _medicationTraiNNService.GetAllAsync();
+            //var medication = await _medicationTraiNNService.GetAllAsync();
             var medicationOrder = await _medicationOrderTraiNNService.GetAllAsync();
-
+            Console.WriteLine(medicationOrder.Count);
             //ViewData["DonguiId"] = new SelectList(medication, "DonguiId", "DonguiId");
             ViewData["DonguiId"] = new SelectList(medicationOrder, "Id", "Id");
             return Page();
