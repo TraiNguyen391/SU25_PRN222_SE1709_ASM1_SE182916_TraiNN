@@ -46,9 +46,12 @@
         <span asp-validation-for="MedicationTraiNn.Type" class="text-danger"></span>
     </div>
 
-   <div class="mb-3">
+    <div class="mb-3">
         <label asp-for="MedicationTraiNn.Status" class="form-label fw-bold"></label>
-        <input asp-for="MedicationTraiNn.Status" class="form-control" readonly />
+        <select asp-for="MedicationTraiNn.Status" class="form-control">
+            <option value="true">Available</option>
+            <option value="false">Unavailable</option>
+        </select>
         <span asp-validation-for="MedicationTraiNn.Status" class="text-danger"></span>
     </div>
 

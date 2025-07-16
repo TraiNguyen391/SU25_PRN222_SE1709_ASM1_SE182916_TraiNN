@@ -26,6 +26,8 @@
                 <th>@Html.DisplayNameFor(model => model.MedicationTraiNn[0].Unit)</th>
                 <th>@Html.DisplayNameFor(model => model.MedicationTraiNn[0].Type)</th>
                 <th>@Html.DisplayNameFor(model => model.MedicationTraiNn[0].Status)</th>
+                <th>@Html.DisplayNameFor(model => model.MedicationTraiNn[0].ParentNote)</th>
+                <th>@Html.DisplayNameFor(model => model.MedicationTraiNn[0].NurseNote)</th>
                 <th>@Html.DisplayNameFor(model => model.MedicationTraiNn[0].ReceiveDate)</th>
                 <th>Actions</th>
             </tr>
@@ -50,6 +52,8 @@
                             <span class="badge bg-danger">Unavailable</span>
                         }
                     </td>
+                    <td>@Html.DisplayFor(modelItem => item.ParentNote)</td>
+                    <td>@Html.DisplayFor(modelItem => item.NurseNote)</td>
                     <td>@Html.DisplayFor(modelItem => item.ReceiveDate)</td>
                     <td class="text-center">
                         <a asp-page="./Details" asp-route-id="@item.MedicationTraiNNid" class="btn btn-sm btn-info text-white me-1">
