@@ -10,7 +10,6 @@ public partial class MedicationTraiNn
 {
     public int MedicationTraiNNid { get; set; }
 
-    //[Required(ErrorMessage = "DonguiId is required")]
     [Display(Name = "Dongui ID")]
     [Range(1, int.MaxValue, ErrorMessage = "Dongui ID must be a positive integer")]
     [RegularExpression(@"^\d+$", ErrorMessage = "Dongui ID must be a valid number")]
